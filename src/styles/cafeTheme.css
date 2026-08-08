@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* 1. REGENT CLASSIC (Krem Zemin, Koyu Tipografi & Karamel Vurgu) */
+[data-theme="regent-classic"] {
+  --bg-primary: #fcfbfa;
+  --bg-card: #ffffff;
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --accent: #1a1a1a;
+  --accent-highlight: #c87d55;
+  --btn-bg: #1a1a1a;
+  --btn-text: #ffffff;
+  --border-color: #e5e5e5;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+/* 2. ESPRESSO ROASTERY (Loş Espresso & Karamel Köpüğü) */
+[data-theme="espresso-roastery"] {
+  --bg-primary: #12100e;
+  --bg-card: #1c1815;
+  --text-main: #f5efe6;
+  --text-muted: #ad9f91;
+  --accent: #d48c46;
+  --accent-highlight: #d48c46;
+  --btn-bg: #d48c46;
+  --btn-text: #12100e;
+  --border-color: rgba(212, 140, 70, 0.22);
+  --font-heading: 'Outfit', sans-serif;
+}
+
+/* 3. BOTANICAL GARDEN (Koyu Orman Yeşili & Açık Krem) */
+[data-theme="botanical-garden"] {
+  --bg-primary: #f2f5f1;
+  --bg-card: #ffffff;
+  --text-main: #1b291e;
+  --text-muted: #576d5c;
+  --accent: #2e4a33;
+  --accent-highlight: #2e4a33;
+  --btn-bg: #2e4a33;
+  --btn-text: #ffffff;
+  --border-color: #dce3db;
+  --font-heading: 'Georgia', serif;
+}
+
+/* 4. MATCHA & OAT (Soft Yeşil & Sütlü Krem) */
+[data-theme="matcha-oat"] {
+  --bg-primary: #f7f6f0;
+  --bg-card: #ffffff;
+  --text-main: #242921;
+  --text-muted: #687363;
+  --accent: #5a7052;
+  --accent-highlight: #8a6443;
+  --btn-bg: #5a7052;
+  --btn-text: #ffffff;
+  --border-color: #e2e0d4;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+/* 5. NORDIC MINIMAL (İskandinav Açık Meşe & Füme) */
+[data-theme="nordic-minimal"] {
+  --bg-primary: #f4f4f4;
+  --bg-card: #ffffff;
+  --text-main: #111111;
+  --text-muted: #777777;
+  --accent: #111111;
+  --accent-highlight: #444444;
+  --btn-bg: #111111;
+  --btn-text: #ffffff;
+  --border-color: #dedede;
+  --font-heading: 'Inter', sans-serif;
+}
+
+/* GENEL BİLEŞEN VE GOVDE STİLLERİ */
+.regent-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.regent-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-heading), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
