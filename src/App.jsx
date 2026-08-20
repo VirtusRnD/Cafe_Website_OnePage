@@ -10,6 +10,7 @@ import WorkshopsGrid from "./components/WorkshopsGrid";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 
+import { cafeConfig } from "./config/cafeConfig"; // yolunuzu './config/cafeConfig' olarak kontrol edin
 import "./styles/cafeTheme.css";
 
 const BACKEND_URL = "https://theme-backend-vh34.onrender.com";
@@ -17,13 +18,21 @@ const socket = io(BACKEND_URL);
 const CURRENT_SITE_ID = "cafe-onepage";
 
 export default function App() {
-  const [currentTheme, setCurrentTheme] = useState("regent-classic");
+  const [currentTheme, setCurrentTheme] = useState(cafeConfig.theme || "regent-classic");
 
+  // cafeConfig.theme dosyasında bir değişiklik olduğunda state'e yansıt
+  useEffect(() => {
+    if (cafeConfig.theme) {
+      setCurrentTheme(cafeConfig.theme);
+    }
+  }, [cafeConfig.theme]);
+
+  // Backend / Socket Bağlantısı
   useEffect(() => {
     fetch(`${BACKEND_URL}/api/themes/${CURRENT_SITE_ID}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.activeTheme) {
+        if (data && data.activeTheme) {
           setCurrentTheme(data.activeTheme);
         }
       })
@@ -42,12 +51,14 @@ export default function App() {
     };
   }, []);
 
+  // HTML ve BODY etiketine temayı uygula
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", currentTheme);
+    document.body.setAttribute("data-theme", currentTheme);
   }, [currentTheme]);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-main)] transition-colors duration-300">
+    <div className="min-h-screen bg-transparent text-[var(--text-main)] transition-colors duration-300">
       <Navbar />
       <main>
         <Hero />

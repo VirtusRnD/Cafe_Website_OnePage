@@ -1,5 +1,5 @@
 export const cafeConfig = {
-  theme: "regent-classic",
+  theme: "matcha-oat",
 
   info: {
     name: "REGENT COFFEE ROASTERS",
