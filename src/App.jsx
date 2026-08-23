@@ -10,7 +10,7 @@ import WorkshopsGrid from "./components/WorkshopsGrid";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 
-import { cafeConfig } from "./config/cafeConfig"; // yolunuzu './config/cafeConfig' olarak kontrol edin
+import { cafeConfig } from "./config/cafeConfig";
 import "./styles/cafeTheme.css";
 
 const BACKEND_URL = "https://theme-backend-vh34.onrender.com";
@@ -20,14 +20,12 @@ const CURRENT_SITE_ID = "cafe-onepage";
 export default function App() {
   const [currentTheme, setCurrentTheme] = useState(cafeConfig.theme || "regent-classic");
 
-  // cafeConfig.theme dosyasında bir değişiklik olduğunda state'e yansıt
   useEffect(() => {
     if (cafeConfig.theme) {
       setCurrentTheme(cafeConfig.theme);
     }
   }, [cafeConfig.theme]);
 
-  // Backend / Socket Bağlantısı
   useEffect(() => {
     fetch(`${BACKEND_URL}/api/themes/${CURRENT_SITE_ID}`)
       .then((res) => res.json())
@@ -51,7 +49,17 @@ export default function App() {
     };
   }, []);
 
-  // HTML ve BODY etiketine temayı uygula
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data?.type === "THEME_CHANGE" && event.data.themeKey && event.data.siteId === CURRENT_SITE_ID) {
+        setCurrentTheme(event.data.themeKey);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", currentTheme);
     document.body.setAttribute("data-theme", currentTheme);
