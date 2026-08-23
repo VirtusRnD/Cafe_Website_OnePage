@@ -18,10 +18,14 @@ const socket = io(BACKEND_URL);
 const CURRENT_SITE_ID = "cafe-onepage";
 
 export default function App() {
-  const [currentTheme, setCurrentTheme] = useState(cafeConfig.theme || "regent-classic");
+  // 1. İLK YÜKLEMEDE LOCAL STORAGE'A BAK (Backend'i bekleme)
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    const savedTheme = localStorage.getItem(`${CURRENT_SITE_ID}-theme`);
+    return savedTheme || cafeConfig.theme || "regent-classic";
+  });
 
   useEffect(() => {
-    if (cafeConfig.theme) {
+    if (cafeConfig.theme && !localStorage.getItem(`${CURRENT_SITE_ID}-theme`)) {
       setCurrentTheme(cafeConfig.theme);
     }
   }, [cafeConfig.theme]);
@@ -60,7 +64,9 @@ export default function App() {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
+  // 2. TEMA HER DEĞİŞTİĞİNDE LOCAL STORAGE'A KAYDET
   useEffect(() => {
+    localStorage.setItem(`${CURRENT_SITE_ID}-theme`, currentTheme);
     document.documentElement.setAttribute("data-theme", currentTheme);
     document.body.setAttribute("data-theme", currentTheme);
   }, [currentTheme]);
