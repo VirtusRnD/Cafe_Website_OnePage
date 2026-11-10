@@ -6,6 +6,7 @@ export const cafeConfig = {
     tagline: "Nitelikli Çekirdek & Demleme Sanatı",
     subtitle: "Dünyanın seçkin nitelikli çiftliklerinden doğrudan tedarik edilen kahve çekirdekleri, seramik atölyeleri ve artisan lezzetler.",
     phone: "+90 (232) 422 0 800",
+    email: "info@example.com", // yayına almadan önce değiştirin: iletişim formu bu adrese düşer
     address: "Kültür Mahallesi, 1382. Sokak No:12, Alsancak / İzmir",
     hours: "Hafta İçi: 07:30 - 22:00 | Hafta Sonu: 08:30 - 23:00",
     wifiCode: "regentcoffee2026",
